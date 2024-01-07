@@ -1,6 +1,5 @@
 package com.nicolasortiz.chatapp.service.impl;
 
-import com.nicolasortiz.chatapp.model.dto.ResponseDto;
 import com.nicolasortiz.chatapp.model.dto.UserDto;
 import com.nicolasortiz.chatapp.model.entity.User;
 import com.nicolasortiz.chatapp.exception.ExistingUserException;
@@ -9,7 +8,6 @@ import com.nicolasortiz.chatapp.model.mapper.UserMapper;
 import com.nicolasortiz.chatapp.repository.IUserRepository;
 import com.nicolasortiz.chatapp.service.IUserService;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,11 +35,6 @@ public class UserServiceImpl implements IUserService {
         return UserMapper.INSTANCE.userToDto(user);
     }
 
-    @Override
-    public User findByUsername(String username) throws UserNotFoundException {
-        return userRepository.findByUsername(username).orElseThrow(
-                ()-> new UserNotFoundException("Usuario no encontrado"));
-    }
 
     @Override
     public UserDto saveUser(User user) throws ExistingUserException{

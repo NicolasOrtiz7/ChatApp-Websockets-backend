@@ -13,8 +13,6 @@ public interface IUserService {
 
     UserDto findUserById(Long userId) throws UserNotFoundException;
 
-    User findByUsername(String username) throws UserNotFoundException;
-
     UserDto saveUser(User user) throws ExistingUserException;
 
     UserDto deleteUserById(Long userId) throws UserNotFoundException;

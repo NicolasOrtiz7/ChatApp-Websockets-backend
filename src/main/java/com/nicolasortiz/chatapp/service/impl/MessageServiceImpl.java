@@ -10,7 +10,6 @@ import com.nicolasortiz.chatapp.model.mapper.MessageMapper;
 import com.nicolasortiz.chatapp.repository.IMessageRepository;
 import com.nicolasortiz.chatapp.service.IChatService;
 import com.nicolasortiz.chatapp.service.IMessageService;
-import com.nicolasortiz.chatapp.service.IUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,22 +24,11 @@ public class MessageServiceImpl implements IMessageService {
     private final IMessageRepository messageRepository;
 
     private final IChatService chatService;
-    private final IUserService userService;
 
 
-    // Busca todos los mensajes de un chat
+    // Devuelve los datos del chat y todos los mensajes
     @Override
-    public List<MessageDto> findMessagesByChatId(Long chatId) {
-
-        List<Message> messageList = messageRepository.findByChatId(chatId);
-
-        return  messageList.stream().map(
-                m -> MessageMapper.INSTANCE.messageToDto(m)).collect(Collectors.toList());
-    }
-
-
-    @Override
-    public ChatDto getMessages(Long chatId) {
+    public ChatDto findChatAndMessages(Long chatId) {
         // Verifica si el chat existe o lanza error
         Chat chatExists = chatService.findChatByChatId(chatId);
 
@@ -51,6 +39,16 @@ public class MessageServiceImpl implements IMessageService {
 
         return chatDto;
     }
+
+    // Busca todos los mensajes de un chat, pero no los datos del chat
+    @Override
+    public List<MessageDto> findMessagesByChatId(Long chatId) {
+        List<Message> messageList = messageRepository.findByChatId(chatId);
+        return  messageList.stream().map(
+                m -> MessageMapper.INSTANCE.messageToDto(m)).collect(Collectors.toList());
+    }
+
+
 
     @Override
     public void sendMessage(Message message){

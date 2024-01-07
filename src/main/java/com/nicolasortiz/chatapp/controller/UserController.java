@@ -44,7 +44,6 @@ public class UserController {
                 .build());
     }
 
-    // Esta función no la utilizo porque los usuarios se guardan desde el controller de seguridad
     @PostMapping
     public ResponseEntity<ResponseDto> saveUser(@RequestBody @Valid User user)
             throws ExistingUserException {

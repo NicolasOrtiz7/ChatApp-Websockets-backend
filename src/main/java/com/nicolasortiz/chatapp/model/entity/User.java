@@ -30,10 +30,11 @@ public class User {
     @UniqueElements
     private String username;
 
-    @Email
+    // El proyecto no implementa seguridad. Por eso están deshabilitadas las validaciones
+//    @Email
     private String email;
 
-    @NotBlank @NotNull
+//    @NotBlank @NotNull
     private String password;
 
 

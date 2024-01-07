@@ -12,6 +12,6 @@ public interface IMessageService {
 
     void sendMessage(Message message);
 
-    ChatDto getMessages(Long chatId);
+    ChatDto findChatAndMessages(Long chatId);
 
 }
