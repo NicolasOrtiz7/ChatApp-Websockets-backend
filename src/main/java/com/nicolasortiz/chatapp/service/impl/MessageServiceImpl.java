@@ -1,9 +1,12 @@
 package com.nicolasortiz.chatapp.service.impl;
 
 import com.nicolasortiz.chatapp.exception.ChatNotFoundException;
+import com.nicolasortiz.chatapp.model.dto.ChatDto;
+import com.nicolasortiz.chatapp.model.dto.MessageDto;
 import com.nicolasortiz.chatapp.model.entity.Chat;
 import com.nicolasortiz.chatapp.model.entity.Message;
 import com.nicolasortiz.chatapp.model.entity.User;
+import com.nicolasortiz.chatapp.model.mapper.MessageMapper;
 import com.nicolasortiz.chatapp.repository.IMessageRepository;
 import com.nicolasortiz.chatapp.service.IChatService;
 import com.nicolasortiz.chatapp.service.IMessageService;
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -26,11 +30,26 @@ public class MessageServiceImpl implements IMessageService {
 
     // Busca todos los mensajes de un chat
     @Override
-    public List<Message> findMessagesByChatId(Long chatId) {
+    public List<MessageDto> findMessagesByChatId(Long chatId) {
+
+        List<Message> messageList = messageRepository.findByChatId(chatId);
+
+        return  messageList.stream().map(
+                m -> MessageMapper.INSTANCE.messageToDto(m)).collect(Collectors.toList());
+    }
+
+
+    @Override
+    public ChatDto getMessages(Long chatId) {
         // Verifica si el chat existe o lanza error
         Chat chatExists = chatService.findChatByChatId(chatId);
 
-        return messageRepository.findByChatId(chatId);
+        // Asigna el chat y la lista de mensajes
+        ChatDto chatDto = new ChatDto();
+        chatDto.setChat(chatExists);
+        chatDto.setMessages(findMessagesByChatId(chatId));
+
+        return chatDto;
     }
 
     @Override
@@ -49,5 +68,6 @@ public class MessageServiceImpl implements IMessageService {
         message.setDatetime(new Date());
         messageRepository.save(message);
     }
+
 
 }
