@@ -1,5 +1,6 @@
 package com.nicolasortiz.chatapp.exception.controller;
 
+import com.nicolasortiz.chatapp.exception.ChatNotFoundException;
 import com.nicolasortiz.chatapp.exception.ExistingUserException;
 import com.nicolasortiz.chatapp.exception.UserNotFoundException;
 import com.nicolasortiz.chatapp.model.dto.ResponseDto;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,6 +60,17 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler {
                 .body(ResponseDto.builder()
                         .status(HttpStatus.NOT_FOUND)
                         .message(ex.getMessage())
+                        .build());
+    }
+
+    @ExceptionHandler(ChatNotFoundException.class)
+    public ResponseEntity<ResponseDto> chatNotFound(ChatNotFoundException ex){
+        return ResponseEntity.
+                status(HttpStatus.NOT_FOUND)
+                .body(ResponseDto.builder()
+                        .status(HttpStatus.OK)
+                        .message(ex.getMessage())
+                        .response(Collections.emptyList())
                         .build());
     }
 
