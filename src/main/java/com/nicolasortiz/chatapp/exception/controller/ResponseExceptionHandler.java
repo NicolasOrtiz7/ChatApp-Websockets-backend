@@ -66,7 +66,7 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(ChatNotFoundException.class)
     public ResponseEntity<ResponseDto> chatNotFound(ChatNotFoundException ex){
         return ResponseEntity.
-                status(HttpStatus.NOT_FOUND)
+                status(HttpStatus.OK)
                 .body(ResponseDto.builder()
                         .status(HttpStatus.OK)
                         .message(ex.getMessage())

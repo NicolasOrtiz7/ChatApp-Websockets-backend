@@ -27,7 +27,6 @@ public class User {
 
     @NotBlank @NotNull @Size(min = 3, max = 20)
     @Column(unique = true)
-    @UniqueElements
     private String username;
 
     // El proyecto no implementa seguridad. Por eso están deshabilitadas las validaciones

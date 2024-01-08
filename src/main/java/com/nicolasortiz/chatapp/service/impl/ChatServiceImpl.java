@@ -22,7 +22,7 @@ public class ChatServiceImpl implements IChatService {
     public Chat findChatByChatId(Long chatId) {
         return chatRepository
                 .findById(chatId)
-                .orElseThrow(()-> new ChatNotFoundException("Chat no encontrado"));
+                .orElseThrow(()-> new ChatNotFoundException("No existen mensajes o el chat no fue encontrado"));
     }
 
 
