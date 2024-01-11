@@ -13,8 +13,8 @@ public interface IUserService {
 
     UserDto findUserById(Long userId) throws UserNotFoundException;
 
-    UserDto saveUser(User user) throws ExistingUserException;
+    void saveUser(User user) throws ExistingUserException;
 
-    UserDto deleteUserById(Long userId) throws UserNotFoundException;
+    void deleteUserById(Long userId) throws UserNotFoundException;
 
 }

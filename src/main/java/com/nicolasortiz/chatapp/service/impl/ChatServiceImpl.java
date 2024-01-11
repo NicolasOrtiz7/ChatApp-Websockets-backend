@@ -29,7 +29,7 @@ public class ChatServiceImpl implements IChatService {
     @Override
     public Chat findChatByUserIds(Long user1, Long user2) {
         return chatRepository.findChatByUserIds(user1, user2)
-                .orElseThrow(()-> new ChatNotFoundException("No existe el chat con esos usuarios"));
+                .orElseThrow(()-> new ChatNotFoundException("El chat está vacío o no existe"));
     }
 
     @Override

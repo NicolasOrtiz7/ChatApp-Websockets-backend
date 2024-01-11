@@ -23,8 +23,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     public List<UserDto> findAllUsers() {
         List<User> userList = userRepository.findAll();
-        return userList.stream().map(
-                u -> UserMapper.INSTANCE.userToDto(u)).collect(Collectors.toList());
+        return userList.stream().map(UserMapper.INSTANCE::userToDto).toList();
     }
 
     @Override
@@ -37,24 +36,19 @@ public class UserServiceImpl implements IUserService {
 
 
     @Override
-    public UserDto saveUser(User user) throws ExistingUserException{
-        Optional<User> userFound = userRepository.findByUsernameOrEmail(user.getUsername(), user.getEmail());
+    public void saveUser(User user) throws ExistingUserException{
+        Optional<User> userFound = userRepository
+                .findByUsernameOrEmail(user.getUsername(), user.getEmail());
 
         if (userFound.isPresent())
             throw new ExistingUserException("Ya existe un usuario con ese email o username");
-
-        User userSaved = userRepository.save(user);
-
-        return UserMapper.INSTANCE.userToDto(userSaved);
+        userRepository.save(user);
     }
 
     @Override
-    public UserDto deleteUserById(Long userId) throws UserNotFoundException{
+    public void deleteUserById(Long userId) throws UserNotFoundException{
         User userDeleted = userRepository.findById(userId).orElseThrow(
                 ()-> new UserNotFoundException("Usuario no encontrado"));
-
         userRepository.deleteById(userId);
-
-        return UserMapper.INSTANCE.userToDto(userDeleted);
     }
 }

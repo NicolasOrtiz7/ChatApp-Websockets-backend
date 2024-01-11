@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @ControllerAdvice
-public class ResponseExceptionHandler extends ResponseEntityExceptionHandler {
+public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
 
     // Error al crear usuario. Dependencia Validation
