@@ -85,8 +85,6 @@
                 </configuration>
             </plugin>
 
-            <!--			Este plugin es de MapStruct y causa problemas al querer iniciar el proyecto.
-                            Pero no es necesario usarlo -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
