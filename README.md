@@ -7,7 +7,7 @@ Este es un proyecto de aplicación de chat en tiempo real con WebSockets desarro
 - Java 17
 - Spring Boot 3.2
 - WebSockets
-- JDK 21
+- JDK 17
 
 ## Instalación
 
