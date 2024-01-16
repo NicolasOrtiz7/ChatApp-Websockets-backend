@@ -9,6 +9,9 @@ Este es un proyecto de aplicación de chat en tiempo real con WebSockets desarro
 - WebSockets
 - JDK 17
 
+## Video de funcionamiento en YouTube
+https://youtu.be/EWD9xIA7nb0?si=yMcx243wiLl-6mMs
+
 ## Instalación
 
 1. **Clonar el repositorio back end**
